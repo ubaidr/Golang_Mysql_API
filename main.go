@@ -39,7 +39,14 @@ var accobj= &Account{}
 func main() {
 	fmt.Println("Running...")
 
-	path:=os.Getenv("DB_CONNECTION")
+	user1:=os.Getenv("user1")
+	pass:=os.Getenv("pass")
+	hostport:=os.Getenv("hostport")
+	schema:=os.Getenv("schema")
+	option:=os.Getenv("option")
+
+	path:=fmt.Sprintf("%s:%s@tcp(%s)/%s?%s", user1, pass, hostport,
+		schema, option)
 	db, err = gorm.Open("mysql", path)
 
 	if err != nil {
